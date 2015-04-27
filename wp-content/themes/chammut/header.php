@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel='stylesheet' id='bootstrap-css'  href='<?php echo get_template_directory_uri()?>/style/themes/merapi/css/bootstrap.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-css'  href='<?php echo get_template_directory_uri()?>/style/themes/merapi/bootstrap_3_media_queries.css' type='text/css' media='all' />
     <link rel='stylesheet' id='plugin-css'  href='<?php echo get_template_directory_uri()?>/style/themes/merapi/css/plugin.css' type='text/css' media='all' />
     <link rel='stylesheet' id='stylesheet-css'  href='<?php echo get_template_directory_uri()?>/style/themes/merapi/style.css' type='text/css' media='all' />
     <link rel='stylesheet' id='font-css'  href='<?php echo get_template_directory_uri()?>/style/themes/merapi/css/font.css' type='text/css' media='all' />

@@ -54,62 +54,33 @@
         <div class="row">
             <ul class="grid effect-6" id="grid">
 
-                <?php $args = array(
-                    'numberposts' => 10,
-                    'offset' => 0,
-                    'category' => 0,
-                    'orderby' => 'post_date',
-                    'order' => 'DESC',
-                    'include' => '',
-                    'exclude' => '',
-                    'meta_key' => '',
-                    'meta_value' =>'',
-                    'post_type' => 'post',
-                    'post_status' => 'draft, publish, future, pending, private',
-                    'suppress_filters' => true );
+            <?php if ( have_posts() ) :
+        while ( have_posts() ) : the_post(); ?>
 
-                $recent_posts = wp_get_recent_posts( $args, ARRAY_A );
+            <?php
+            /*
+             * Run the loop for the search to output the results.
+             * If you want to overload this in a child theme then include a file
+             * called content-search.php and that will be used instead.
+             */
+            get_template_part( 'content', 'search' );
 
-                foreach( $recent_posts as $recent ){
-                ?>
-                <li  id="post-<?php echo $recent["ID"];?>" class="post-<?php echo $recent["ID"];?> post type-post status-publish format-standard has-post-thumbnail hentry category-standard-post tag-description tag-image tag-people tag-text col-md-6 animate">
-                    <div class="post-content">
-                        <div class="intro-post">
-                            <i class="icon post-type icon-elusive-icons-1"></i>
-                            <a href="standard-post/" title="Standard Post With Image" >
-                                <div class="post-thumb">
-                                    <?php
-                                    $default_attr = array(
-                                        'width'=>1000,
-                                        'height'=>732,
-                                        'class'	=> "attachment-post-thumbnail wp-post-image",
-                                        'alt'	=> trim( strip_tags( $recent["post_title"] ) ),
-                                        'title'	=> trim( strip_tags( $recent["post_title"] ) ),
-                                    );
-                                    echo get_the_post_thumbnail( $recent["ID"], array( 350, 256), $default_attr ); ?>
+            // End the loop.
+        endwhile;
 
-                                </div>
-                                <!-- post thumb -->
-                            </a>
-                        </div>
-                        <div class="post-entry">
-                            <div class="post-title">
-                                <h2>
-                                    <a href="<?php echo get_permalink($recent["ID"]);?>" title="<?php echo $recent["post_title"];?>"><?php echo $recent["post_title"];?></a>
-                                </h2>
-                            </div>
-                            <!-- post-title -->
-                            <div class="akmanda-excerpt">
-                                <p><?php echo short_content($recent['post_content'],40);?></p>
-                                <div class="more-button">
-                                    <a href="<?php echo get_permalink($recent["ID"]);?>" title="Standard Post With Image" class="more">Continue</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- post-content -->
-                </li>
-                <?php } ?>
+    // Previous/next page navigation.
+    the_posts_pagination( array(
+        'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
+        'next_text'          => __( 'Next page', 'twentyfifteen' ),
+        'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
+    ) );
+
+    // If no content, include the "No posts found" template.
+    else :
+    get_template_part( 'content', 'none' );
+
+    endif;
+    ?>
             </ul>
 
         </div>
@@ -124,7 +95,7 @@
         </div>
         <?php if ( is_active_sidebar( 'sidebarauthor' ) ) : ?>
 
-                <?php dynamic_sidebar( 'sidebarauthor' ); ?>
+            <?php dynamic_sidebar( 'sidebarauthor' ); ?>
 
         <?php endif; ?>
 

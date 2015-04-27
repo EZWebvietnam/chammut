@@ -131,8 +131,11 @@ $post_data = get_post($postid);
                     <div class="bord" data-scroll-reveal="bottom"></div>
                 </div>
                 <ol class="comment-list" data-scroll-reveal="bottom">
-                    <?php $comments = get_comments($post_data->ID);
-                    //print_r($comments);exit;
+                    <?php
+
+                    $comments = get_approved_comments($post_data->ID);
+
+
                     foreach($comments as $cm)
                     {
                     ?>
@@ -253,7 +256,7 @@ $post_data = get_post($postid);
 <script type='text/javascript' src='<?php echo get_template_directory_uri()?>/style/plugins/contact-form-7/includes/js/scripts.js?ver=3.9.3'></script>
 <script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201513'></script>
 <script type='text/javascript' src='<?php echo get_template_directory_uri()?>/js/js/comment-reply.min.js?ver=4.0.1'></script>
-<script type='text/javascript' src='<?php echo get_template_directory_uri()?>/js/themes/merapi/js/pluginsFoot.js?ver=4.0.1'></script>
+<script type='text/javascript' src='<?php echo get_template_directory_uri()?>/style/themes/merapi/js/pluginsFoot.js?ver=4.0.1'></script>
 <script type='text/javascript' src='<?php echo get_template_directory_uri()?>/style/themes/merapi/js/main.js?ver=4.0.1'></script>
 <script src="http://stats.wp.com/e-201513.js" type="text/javascript"></script>
 <script type="text/javascript">
