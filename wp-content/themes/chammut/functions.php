@@ -22,5 +22,13 @@ register_sidebar(array(
     'before_widget' => '<div id="facebook-likebox-2" class="widget widget_facebook_likebox">',
     'after_widget' => '</div>'
 ));
+register_sidebar(array(
+    'id' => 'searchsidebar',
+    'name' => 'Search Sidebar',
+    'description' => 'Used on every page BUT the homepage page template.',
+    'before_widget' => '<div id="search-2" class="widget widget_search">',
+    'after_widget' => '</div>'
+));
+
 if ( function_exists('register_sidebar') )
     register_sidebar();

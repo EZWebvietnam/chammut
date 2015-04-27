@@ -117,8 +117,8 @@
     <!-- wrapper -->
     <aside id="primary-sidebar" class="widget-area col-md-4" role="complementary">
         <div id="search-2" class="widget widget_search">
-            <form method="get" class="searchform" action="" role="search">
-                <input type="search" class="field" name="s" value="" id="s" placeholder="Search this site" />
+            <form method="get" class="searchform" action="<?php echo home_url();?>" role="search">
+                <input type="search" class="field" name="s" value="<?php echo esc_html($s, 1); ?>" id="s" placeholder="Search this site" />
                 <input type="submit" class="submit search-button" value="" />
             </form>
         </div>
