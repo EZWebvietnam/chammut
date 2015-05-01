@@ -21,12 +21,16 @@
             </div>
         </div>
         <!-- logo -->
-        <nav id="mainmenu" class="menu pull-left">
+		<?php require('menu.php');?>
+        <!--<nav id="mainmenu" class="menu pull-left">
+
+
             <ul id="menu-top-menu" class="sm sm-clean">
                 <li id="menu-item-3093" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-3093"><a href="">Home</a></li>
                 <li id="menu-item-3094" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3094">
                     <a href="#">Shortcode</a>
                     <ul class="sub-menu">
+
                         <li id="menu-item-3143" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3143"><a href="accordion/">Accordion</a></li>
                         <li id="menu-item-3144" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3144"><a href="column/">Column</a></li>
                         <li id="menu-item-3140" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3140"><a href="dropcap/">Dropcap</a></li>
@@ -39,7 +43,7 @@
                 <li id="menu-item-3137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3137"><a href="contact/">Contact</a></li>
                 <li id="menu-item-3145" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3145"><a href="typography/">Typography</a></li>
             </ul>
-        </nav>
+        </nav>-->
         <ul class="footer-social pull-right">
             <li class="twitter"><a href="http://twitter.com/#" class="icon icon-twitter-alt"></a></li>
             <li class="google"><a href="http://google.com/#" class="icon icon-google"></a></li>
@@ -54,33 +58,37 @@
         <div class="row">
             <ul class="grid effect-6" id="grid">
 
-            <?php if ( have_posts() ) :
-        while ( have_posts() ) : the_post(); ?>
+               <?php if ( have_posts() ) : ?>
+			   <?php
+				// Start the loop.
+				while ( have_posts() ) : the_post(); ?>
 
-            <?php
-            /*
-             * Run the loop for the search to output the results.
-             * If you want to overload this in a child theme then include a file
-             * called content-search.php and that will be used instead.
-             */
-            get_template_part( 'content', 'search' );
+					<?php
+					/*
+					 * Run the loop for the search to output the results.
+					 * If you want to overload this in a child theme then include a file
+					 * called content-search.php and that will be used instead.
+					 */
+					get_template_part( 'content', 'search' );
 
-            // End the loop.
-        endwhile;
+				// End the loop.
+				endwhile;
 
-    // Previous/next page navigation.
-    the_posts_pagination( array(
-        'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
-        'next_text'          => __( 'Next page', 'twentyfifteen' ),
-        'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
-    ) );
+				// Previous/next page navigation.
+				the_posts_pagination( array(
+					'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
+					'next_text'          => __( 'Next page', 'twentyfifteen' ),
+					'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
+				) );
 
-    // If no content, include the "No posts found" template.
-    else :
-    get_template_part( 'content', 'none' );
+			// If no content, include the "No posts found" template.
+			else :
+				get_template_part( 'content', 'none' );
 
-    endif;
-    ?>
+			endif;
+			?>
+                
+                
             </ul>
 
         </div>
@@ -95,7 +103,7 @@
         </div>
         <?php if ( is_active_sidebar( 'sidebarauthor' ) ) : ?>
 
-            <?php dynamic_sidebar( 'sidebarauthor' ); ?>
+                <?php dynamic_sidebar( 'sidebarauthor' ); ?>
 
         <?php endif; ?>
 
@@ -113,13 +121,11 @@
                 <li class="col-xs-6"><a href="http://www.themesawesome.com/"><img class="twinsbox" src="http://nomad.themesawesome.com/style/uploads/2014/01/ads125.png" alt="" /></a></li>
             </ul>
         </div>
-        <div id="categories-2" class="widget widget_categories">
-            <h4 class="widget-title">Categories</h4>
-            <ul>
-                <li class="cat-item cat-item-2"><a href="category/post-format/" >Post Format</a></li>
-                <li class="cat-item cat-item-3"><a href="category/standard-post/" >Standard Post</a></li>
-            </ul>
-        </div>
+        <?php if ( is_active_sidebar( 'categories-bar' ) ) : ?>
+
+                <?php dynamic_sidebar( 'categories-bar' ); ?>
+
+        <?php endif; ?>
     </aside>
     <!-- #primary-sidebar -->
 </div>
@@ -193,9 +199,3 @@
 
 </body>
 </html>
-<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
-   Page Caching using disk: enhanced
-   Database Caching using disk
-   Object Caching 2426/2747 objects using disk
-
-    Served from: merapi.themesawesome.com @ 2015-04-25 03:56:15 by W3 Total Cache -->

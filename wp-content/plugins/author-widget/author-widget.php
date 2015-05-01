@@ -26,16 +26,28 @@ class author_widget_plugin extends WP_Widget {
     }
     public function upload_scripts()
     {
-        wp_enqueue_script('media-upload');
-        wp_enqueue_script('thickbox');
+       wp_enqueue_script('jquery');
+		
+		wp_enqueue_script('thickbox');
+		wp_enqueue_style('thickbox');
+		
+		wp_enqueue_script('media-upload');
+		
 
     }
     public function upload_styles()
     {
-        wp_enqueue_style('thickbox');
+       wp_enqueue_script('jquery');
+		
+		wp_enqueue_script('thickbox');
+		wp_enqueue_style('thickbox');
+		
+		wp_enqueue_script('media-upload');
+		wp_enqueue_script('wptuts-upload');
     }
     // widget form creation
     function form($instance) {
+		
         if($instance)
         {
             $content = esc_attr($instance['content']);
@@ -66,8 +78,7 @@ class author_widget_plugin extends WP_Widget {
 
                         tb_remove();
                     };
-
-                    tb_show('', 'media-upload.php?type=image&TB_iframe=true');
+                    tb_show('Upload Author', 'media-upload.php?referer=wptuts-settings&amp;type=image&amp;TB_iframe=true&amp;post_id=0', false);
                     return false;
                 });
             });

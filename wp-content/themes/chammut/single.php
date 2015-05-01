@@ -21,25 +21,7 @@
             </div>
         </div>
         <!-- logo -->
-        <nav id="mainmenu" class="menu pull-left">
-            <ul id="menu-top-menu" class="sm sm-clean">
-                <li id="menu-item-3093" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-3093"><a href="http://merapi.themesawesome.com/">Home</a></li>
-                <li id="menu-item-3094" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3094">
-                    <a href="#">Shortcode</a>
-                    <ul class="sub-menu">
-                        <li id="menu-item-3143" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3143"><a href="http://merapi.themesawesome.com/accordion/">Accordion</a></li>
-                        <li id="menu-item-3144" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3144"><a href="http://merapi.themesawesome.com/column/">Column</a></li>
-                        <li id="menu-item-3140" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3140"><a href="http://merapi.themesawesome.com/dropcap/">Dropcap</a></li>
-                        <li id="menu-item-3139" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3139"><a href="http://merapi.themesawesome.com/google-maps-2/">Google Maps</a></li>
-                        <li id="menu-item-3141" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3141"><a href="http://merapi.themesawesome.com/highlight-text/">Highlight text</a></li>
-                        <li id="menu-item-3138" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3138"><a href="http://merapi.themesawesome.com/tabs/">Tabs</a></li>
-                        <li id="menu-item-3142" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3142"><a href="http://merapi.themesawesome.com/toogle/">Toogle</a></li>
-                    </ul>
-                </li>
-                <li id="menu-item-3137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3137"><a href="http://merapi.themesawesome.com/contact/">Contact</a></li>
-                <li id="menu-item-3145" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3145"><a href="http://merapi.themesawesome.com/typography/">Typography</a></li>
-            </ul>
-        </nav>
+        <?php require('menu.php');?>
         <ul class="footer-social pull-right">
             <li class="twitter"><a href="http://twitter.com/#" class="icon icon-twitter-alt"></a></li>
             <li class="google"><a href="http://google.com/#" class="icon icon-google"></a></li>
@@ -217,15 +199,12 @@ $post_data = get_post($postid);
                 <li class="col-xs-6"><a href="http://www.themesawesome.com/"><img class="twinsbox" src="http://nomad.themesawesome.com/wp-content/uploads/2014/01/ads125.png" alt="" /></a></li>
             </ul>
         </div>
-        <div id="categories-2" class="widget widget_categories">
-            <h4 class="widget-title">Categories</h4>
-            <ul>
-                <li class="cat-item cat-item-2"><a href="http://merapi.themesawesome.com/category/post-format/" >Post Format</a>
-                </li>
-                <li class="cat-item cat-item-3"><a href="http://merapi.themesawesome.com/category/standard-post/" >Standard Post</a>
-                </li>
-            </ul>
-        </div>
+		<?php if ( is_active_sidebar( 'categories-bar' ) ) : ?>
+
+                <?php dynamic_sidebar( 'categories-bar' ); ?>
+
+        <?php endif; ?>
+        
     </aside>
     <!-- #primary-sidebar -->
 </div>
@@ -247,7 +226,7 @@ $post_data = get_post($postid);
             document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
             if(oldonload){oldonload()}};
     }());
-</script><script type='text/javascript' src='http://merapi.themesawesome.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+</script><script type='text/javascript' src='<?php echo get_template_directory_uri()?>/style/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
 <script type='text/javascript'>
     /* <![CDATA[ */
     var _wpcf7 = {"loaderUrl":"http:\/\/merapi.themesawesome.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ...","cached":"1"};
@@ -267,9 +246,3 @@ $post_data = get_post($postid);
 </script>
 </body>
 </html>
-<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
-   Page Caching using disk: enhanced
-   Database Caching 1/94 queries in 0.033 seconds using disk
-   Object Caching 1227/1404 objects using disk
-
-    Served from: merapi.themesawesome.com @ 2015-03-24 13:12:38 by W3 Total Cache -->

@@ -21,12 +21,16 @@
             </div>
         </div>
         <!-- logo -->
-        <nav id="mainmenu" class="menu pull-left">
+		<?php require('menu.php');?>
+        <!--<nav id="mainmenu" class="menu pull-left">
+
+
             <ul id="menu-top-menu" class="sm sm-clean">
                 <li id="menu-item-3093" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-3093"><a href="">Home</a></li>
                 <li id="menu-item-3094" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3094">
                     <a href="#">Shortcode</a>
                     <ul class="sub-menu">
+
                         <li id="menu-item-3143" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3143"><a href="accordion/">Accordion</a></li>
                         <li id="menu-item-3144" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3144"><a href="column/">Column</a></li>
                         <li id="menu-item-3140" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3140"><a href="dropcap/">Dropcap</a></li>
@@ -39,7 +43,7 @@
                 <li id="menu-item-3137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3137"><a href="contact/">Contact</a></li>
                 <li id="menu-item-3145" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3145"><a href="typography/">Typography</a></li>
             </ul>
-        </nav>
+        </nav>-->
         <ul class="footer-social pull-right">
             <li class="twitter"><a href="http://twitter.com/#" class="icon icon-twitter-alt"></a></li>
             <li class="google"><a href="http://google.com/#" class="icon icon-google"></a></li>
@@ -76,7 +80,7 @@
                     <div class="post-content">
                         <div class="intro-post">
                             <i class="icon post-type icon-elusive-icons-1"></i>
-                            <a href="standard-post/" title="Standard Post With Image" >
+                            <a href="<?php echo get_permalink($recent["ID"]);?>" title="<?php echo $recent["post_title"];?>" >
                                 <div class="post-thumb">
                                     <?php
                                     $default_attr = array(
@@ -142,13 +146,11 @@
                 <li class="col-xs-6"><a href="http://www.themesawesome.com/"><img class="twinsbox" src="http://nomad.themesawesome.com/style/uploads/2014/01/ads125.png" alt="" /></a></li>
             </ul>
         </div>
-        <div id="categories-2" class="widget widget_categories">
-            <h4 class="widget-title">Categories</h4>
-            <ul>
-                <li class="cat-item cat-item-2"><a href="category/post-format/" >Post Format</a></li>
-                <li class="cat-item cat-item-3"><a href="category/standard-post/" >Standard Post</a></li>
-            </ul>
-        </div>
+        <?php if ( is_active_sidebar( 'categories-bar' ) ) : ?>
+
+                <?php dynamic_sidebar( 'categories-bar' ); ?>
+
+        <?php endif; ?>
     </aside>
     <!-- #primary-sidebar -->
 </div>
@@ -222,9 +224,3 @@
 
 </body>
 </html>
-<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
-   Page Caching using disk: enhanced
-   Database Caching using disk
-   Object Caching 2426/2747 objects using disk
-
-    Served from: merapi.themesawesome.com @ 2015-04-25 03:56:15 by W3 Total Cache -->
