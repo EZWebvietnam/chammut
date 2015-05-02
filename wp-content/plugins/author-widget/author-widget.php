@@ -112,7 +112,7 @@ class author_widget_plugin extends WP_Widget {
     function widget($args, $instance) {
         extract( $args );
         // these are the widget options
-        $title = apply_filters('widget_title', $instance['title']);
+        
         $author = $instance['author'];
         $content = $instance['content'];
         $image = $instance['image'];

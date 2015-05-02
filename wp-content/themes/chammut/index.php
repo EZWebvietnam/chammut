@@ -78,9 +78,19 @@
                 foreach( $recent_posts as $recent ){
                 ?>
                 <li  id="post-<?php echo $recent["ID"];?>" class="post-<?php echo $recent["ID"];?> post type-post status-publish format-standard has-post-thumbnail hentry category-standard-post tag-description tag-image tag-people tag-text col-md-6 animate">
-                    <div class="post-content">
+                    <?php 
+						$type = get_post_format($recent["ID"]);
+						
+						switch($type)
+						{
+							default:
+							{
+					?>
+					
+					<div class="post-content">
                         <div class="intro-post">
                             <i class="icon post-type icon-elusive-icons-1"></i>
+							
                             <a href="<?php echo get_permalink($recent["ID"]);?>" title="<?php echo $recent["post_title"];?>" >
                                 <div class="post-thumb">
                                     <?php
@@ -105,13 +115,102 @@
                             </div>
                             <!-- post-title -->
                             <div class="akmanda-excerpt">
-                                <p><?php echo short_content($recent['post_content'],40);?></p>
+                                <p><?php echo short_content(loaibohtmltrongvanban($recent['post_content']),40);?></p>
                                 <div class="more-button">
                                     <a href="<?php echo get_permalink($recent["ID"]);?>" title="Standard Post With Image" class="more">Continue</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+							<?php break;}
+							case 'audio':
+							{
+								?>
+								<div class="post-content">
+								<div class="intro-post">
+									<i class="icon post-type icon-elusive-icons-1"></i>
+									<div class="entry-audio">
+                                       <?php
+										$pattern = get_shortcode_regex();
+										
+										preg_match('/'.$pattern.'/s', $recent['post_content'], $matches);
+										
+										if (is_array($matches) && $matches[2] == 'soundcloud') {
+										   $shortcode = $matches[0];
+										   echo do_shortcode($shortcode);
+										}
+										
+										?>
+                                    </div>	
+					
+								</div>
+								<div class="post-entry">
+									<div class="post-title">
+										<h2>
+											<a href="<?php echo get_permalink($recent["ID"]);?>" title="<?php echo $recent["post_title"];?>"><?php echo $recent["post_title"];?></a>
+										</h2>
+									</div>
+									<!-- post-title -->
+									<div class="akmanda-excerpt">
+									<?php 
+									$content = $recent['post_content'];
+									$content_strip = strip_shortcode('soundcloud',$content)
+									?>
+										<p><?php echo short_content(loaibohtmltrongvanban($content_strip),40);?></p>
+										<div class="more-button">
+											<a href="<?php echo get_permalink($recent["ID"]);?>" title="Standard Post With Image" class="more">Continue</a>
+										</div>
+									</div>
+								</div>
+							</div>
+								<?php
+								break;
+							}
+							case 'video':
+							{
+								
+								?> 
+								<div class="post-content">
+								<div class="intro-post">
+									<i class="icon post-type icon-elusive-icons-1"></i>
+									<div class="entry-video">
+                                       <?php
+										$pattern = get_shortcode_regex();
+										
+										preg_match('/'.$pattern.'/s', $recent['post_content'], $matches);
+										
+										if (is_array($matches) && $matches[2] == 'embedyt') {
+										   $shortcode = $matches[0];
+										   echo do_shortcode($shortcode);
+										}
+										
+										?>
+                                    </div>	
+					
+								</div>
+								<div class="post-entry">
+									<div class="post-title">
+										<h2>
+											<a href="<?php echo get_permalink($recent["ID"]);?>" title="<?php echo $recent["post_title"];?>"><?php echo $recent["post_title"];?></a>
+										</h2>
+									</div>
+									<!-- post-title -->
+									<div class="akmanda-excerpt">
+									<?php 
+									$content = $recent['post_content'];
+									$content_strip = strip_shortcode('embedyt',$content)
+									?>
+										<p><?php echo short_content(loaibohtmltrongvanban($content_strip),40);?></p>
+										<div class="more-button">
+											<a href="<?php echo get_permalink($recent["ID"]);?>" title="Standard Post With Image" class="more">Continue</a>
+										</div>
+									</div>
+								</div>
+							</div>
+								<?php
+								break;
+							}
+							} ?>
                     <!-- post-content -->
                 </li>
                 <?php } ?>

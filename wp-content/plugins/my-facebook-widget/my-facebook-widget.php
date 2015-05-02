@@ -59,7 +59,7 @@ class my_facebook_widget extends WP_Widget {
     function widget($args, $instance) {
         extract( $args );
         // these are the widget options
-        $title = apply_filters('widget_title', $instance['title']);
+        $title = apply_filters('widget_title', $instance['facebook-script']);
 
         $script = $instance['facebook-script'];
         echo $before_widget;

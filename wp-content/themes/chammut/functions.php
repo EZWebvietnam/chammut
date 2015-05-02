@@ -17,6 +17,37 @@ add_filter('main-nav', function($atts, $item, $args) {
 
     return $atts;
 }, 10, 3);
+function loaibohtmltrongvanban($html, $exceptions = null)
+{
+        if (is_array($exceptions) && !empty($exceptions)) {
+            foreach ($exceptions as $exception) {
+                $openTagPattern = '/<(' . $exception . ')(\s.*?)?>/msi';
+                $closeTagPattern = '/<\/(' . $exception . ')>/msi';
+                $html = preg_replace(array($openTagPattern, $closeTagPattern), array('||l|\1\2|r||',
+                        '||l|/\1|r||'), $html);
+            }
+        }
+        $html = preg_replace('/<.*?>/msi', '', $html);
+        if (is_array($exceptions)) {
+            $html = str_replace('||l|', '<', $html);
+            $html = str_replace('|r||', '>', $html);
+        }
+        return $html; // Code in Vn4rum.net - Thế giới học tập
+}
+function strip_shortcode($code, $content)
+{
+    global $shortcode_tags;
+
+    $stack = $shortcode_tags;
+    $shortcode_tags = array($code => 1);
+
+    $content = strip_shortcodes($content);
+
+    $shortcode_tags = $stack;
+	$content_with_out_pre = str_replace(array('<pre>', '</pre>'),array('', ''), $content);
+	$content_with_out_code = str_replace(array('<code>', '</code>'),array('', ''), $content_with_out_pre);
+    return $content_with_out_code;
+}
 function excerpt($limit) {
 $excerpt = explode(' ', get_the_excerpt(), $limit);
   if (count($excerpt)>=$limit) {
@@ -120,5 +151,3 @@ function theme_name_wp_title( $title, $sep ) {
 	return $title;
 }
 add_filter( 'wp_title', 'theme_name_wp_title', 10, 2 );
-if ( function_exists('register_sidebar') )
-    register_sidebar();
