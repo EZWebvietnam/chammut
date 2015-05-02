@@ -21,7 +21,7 @@
                             </div>
                             <!-- post-title -->
                             <div class="akmanda-excerpt">
-                                <!--<p><?php echo short_content($recent['post_content'],40);?></p>-->
+                               <p><?php echo excerpt(40);?></p>
                                 <div class="more-button">
                                     <a href="<?php echo get_permalink();?>" title="Standard Post With Image" class="more">Continue</a>
                                 </div>

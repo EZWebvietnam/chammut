@@ -4,7 +4,7 @@
     <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" />
     <![endif]-->
     <title>
-        merapi | Just another WordPress site
+       <?php echo wp_title();?>
     </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />

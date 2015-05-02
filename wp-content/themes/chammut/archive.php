@@ -22,7 +22,7 @@
             </div>
         </div>
         <!-- logo -->
-		<?php require('menu.php');?>
+        <?php require('menu.php');?>
         <!--<nav id="mainmenu" class="menu pull-left">
 
 
@@ -57,39 +57,46 @@
 <div id="main" class="site-main container clearfix">
     <div id="content-wrapper" class="wrapper col-md-8 clearfix">
         <div class="row">
+            <!--<header class="page-header">
+                <?php
+                the_archive_title( '<h1 class="page-title">', '</h1>' );
+                the_archive_description( '<div class="taxonomy-description">', '</div>' );
+                ?>
+            </header><!-- .page-header -->
             <ul class="grid effect-6" id="grid">
+                <?php if ( have_posts() ) : ?>
 
-               <?php if ( have_posts() ) : ?>
-			   <?php
-				// Start the loop.
-				while ( have_posts() ) : the_post(); ?>
 
-					<?php
-					/*
-					 * Run the loop for the search to output the results.
-					 * If you want to overload this in a child theme then include a file
-					 * called content-search.php and that will be used instead.
-					 */
-					get_template_part( 'content', 'search' );
 
-				// End the loop.
-				endwhile;
+                    <?php
+                    // Start the Loop.
 
-				// Previous/next page navigation.
-				the_posts_pagination( array(
-					'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
-					'next_text'          => __( 'Next page', 'twentyfifteen' ),
-					'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
-				) );
+                    while ( have_posts() ) : the_post();
 
-			// If no content, include the "No posts found" template.
-			else :
-				get_template_part( 'content', 'none' );
+                        /*
+                         * Include the Post-Format-specific template for the content.
+                         * If you want to override this in a child theme, then include a file
+                         * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+                         */
 
-			endif;
-			?>
-                
-                
+                        get_template_part( 'content', get_post_format() );
+
+                        // End the loop.
+                    endwhile;
+
+                    // Previous/next page navigation.
+                    the_posts_pagination( array(
+                        'prev_text'          => __( 'Previous page', 'chammut' ),
+                        'next_text'          => __( 'Next page', 'chammut' ),
+                        'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'chammut' ) . ' </span>',
+                    ) );
+
+                // If no content, include the "No posts found" template.
+                else :
+                    get_template_part( 'content', 'none' );
+
+                endif;
+                ?>
             </ul>
 
         </div>
@@ -104,7 +111,7 @@
         </div>
         <?php if ( is_active_sidebar( 'sidebarauthor' ) ) : ?>
 
-                <?php dynamic_sidebar( 'sidebarauthor' ); ?>
+            <?php dynamic_sidebar( 'sidebarauthor' ); ?>
 
         <?php endif; ?>
 
@@ -124,7 +131,7 @@
         </div>
         <?php if ( is_active_sidebar( 'categories-bar' ) ) : ?>
 
-                <?php dynamic_sidebar( 'categories-bar' ); ?>
+            <?php dynamic_sidebar( 'categories-bar' ); ?>
 
         <?php endif; ?>
     </aside>

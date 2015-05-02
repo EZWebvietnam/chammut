@@ -2,6 +2,9 @@
 require_once('wp_bootstrap_navwalker.php');
 require_once( 'wptuts-options/wptuts-options.php' );
 add_theme_support( 'post-thumbnails' );
+add_theme_support( 'post-formats', array(
+    'aside', 'image', 'video', 'quote', 'link', 'gallery', 'status', 'audio', 'chat'
+) );
 register_nav_menus( array(
     'primary' => __( 'Primary Menu', 'chammut' ),
 ) );
@@ -14,6 +17,31 @@ add_filter('main-nav', function($atts, $item, $args) {
 
     return $atts;
 }, 10, 3);
+function excerpt($limit) {
+$excerpt = explode(' ', get_the_excerpt(), $limit);
+  if (count($excerpt)>=$limit) {
+      array_pop($excerpt);
+      $excerpt = implode(" ",$excerpt).'...';
+  } else {
+      $excerpt = implode(" ",$excerpt);
+  }
+  $excerpt = preg_replace('`\[[^\]]*\]`','',$excerpt);
+  return $excerpt;
+}
+
+function content($limit) {
+    $content = explode(' ', get_the_content(), $limit);
+    if (count($content)>=$limit) {
+        array_pop($content);
+        $content = implode(" ",$content).'...';
+    } else {
+        $content = implode(" ",$content);
+    }
+    $content = preg_replace('/\[.+\]/','', $content);
+    $content = apply_filters('the_content', $content);
+    $content = str_replace(']]>', ']]&gt;', $content);
+    return $content;
+}
 function short_content($content,$num_word)
 {
     $content = strip_tags($content);
@@ -61,5 +89,36 @@ register_sidebar(array(
     'before_title' => '<h4 class="widget-title">',
     'after_title' => '</h4>',
 ));
+/**
+ * Filters wp_title to print a neat <title> tag based on what is being viewed.
+ *
+ * @param string $title Default title text for current view.
+ * @param string $sep Optional separator.
+ * @return string The filtered title.
+ */
+function theme_name_wp_title( $title, $sep ) {
+	if ( is_feed() ) {
+		return $title;
+	}
+	
+	global $page, $paged;
+
+	// Add the blog name
+	$title .= get_bloginfo( 'name', 'display' );
+
+	// Add the blog description for the home/front page.
+	$site_description = get_bloginfo( 'description', 'display' );
+	if ( $site_description && ( is_home() || is_front_page() ) ) {
+		$title .= " $sep $site_description";
+	}
+
+	// Add a page number if necessary:
+	if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() ) {
+		$title .= " $sep " . sprintf( __( 'Page %s', '_s' ), max( $paged, $page ) );
+	}
+
+	return $title;
+}
+add_filter( 'wp_title', 'theme_name_wp_title', 10, 2 );
 if ( function_exists('register_sidebar') )
     register_sidebar();

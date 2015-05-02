@@ -17,7 +17,8 @@
     <div class="container">
         <div class="logo pull-left">
             <div class="logo-image">
-                <a href="http://merapi.themesawesome.com"><img src="style/uploads/2014/05/white-logo.png" class="image-logo" alt="logo" /></a>
+                <?php $theme_option = get_option( 'theme_wptuts_options' );?>
+                <a href="<?php echo get_bloginfo('url') ?>"><img src="<?php echo $theme_option['logo']?>" class="image-logo" alt="logo" /></a>
             </div>
         </div>
         <!-- logo -->
@@ -69,7 +70,7 @@
                     'meta_key' => '',
                     'meta_value' =>'',
                     'post_type' => 'post',
-                    'post_status' => 'draft, publish, future, pending, private',
+                    'post_status' => 'publish',
                     'suppress_filters' => true );
 
                 $recent_posts = wp_get_recent_posts( $args, ARRAY_A );

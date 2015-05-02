@@ -17,7 +17,8 @@
     <div class="container">
         <div class="logo pull-left">
             <div class="logo-image">
-                <a href="http://merapi.themesawesome.com"><img src="http://merapi.themesawesome.com/wp-content/uploads/2014/05/white-logo.png" class="image-logo" alt="logo" /></a>
+                <?php $theme_option = get_option( 'theme_wptuts_options' );?>
+                <a href="<?php echo get_bloginfo('url') ?>"><img src="<?php echo $theme_option['logo']?>" class="image-logo" alt="logo" /></a>
             </div>
         </div>
         <!-- logo -->
@@ -39,9 +40,10 @@ $post_data = get_post($postid);
     <div id="content-wrapper" class="wrapper col-md-8 clearfix">
         <article  id="post-<?php echo $post_data->ID?>" class="post-<?php echo $post_data->ID?> post type-post status-publish format-image has-post-thumbnail hentry category-post-format tag-description tag-image tag-people tag-text clearfix">
             <div class="post-content clearfix">
-                <a href="<?php echo get_permalink($post_data->ID);?>" title="Image Post With Text" >
+                <a href="<?php echo get_permalink($post_data->ID);?>" title="<?php echo the_title();?>" >
                     <div class="post-thumb">
                         <?php
+
                         if ( has_post_thumbnail() ) {
                             $large_image_url = wp_get_attachment_image_src( get_post_thumbnail_id());
 
@@ -55,7 +57,7 @@ $post_data = get_post($postid);
                 <div class="post-entry">
                     <div class="post-title">
                         <h2>
-                            <a href="<?php echo get_permalink($post_data->ID);?>" title="Image Post With Text"><?php echo get_the_title(); ?></a>
+                            <a href="<?php echo get_permalink($post_data->ID);?>" title="<?php echo the_title();?>"><?php echo get_the_title(); ?></a>
                         </h2>
                     </div>
                     <!-- post-title -->
@@ -106,6 +108,10 @@ $post_data = get_post($postid);
                 <!-- #nav-below -->
             </div>
             <!-- post-content -->
+            <?php
+            if(comments_open())
+            {
+            ?>
             <div id="comments" class="comments-area" data-scroll-reveal="bottom">
                 <div class="comments-title" data-scroll-reveal="bottom">
                     <i class="icon icon-discussion"></i>
@@ -168,6 +174,7 @@ $post_data = get_post($postid);
                 <!-- #respond -->
             </div>
             <!-- #comments -->
+            <?php } ?>
         </article>
         <!-- #post-2605 -->
     </div>

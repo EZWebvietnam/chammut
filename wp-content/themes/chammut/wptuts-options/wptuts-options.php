@@ -35,7 +35,7 @@ function replace_thickbox_text($translated_text, $text ) {
 	if ( 'Insert into Post' == $text ) {
 		$referer = strpos( wp_get_referer(), 'wptuts-settings' );
 		if ( $referer != '' ) {
-			return __('I want this to be my logo!', 'wptuts' );
+			return __('I want to use this image!', 'wptuts' );
 		}
 	}
 
@@ -45,7 +45,7 @@ function replace_thickbox_text($translated_text, $text ) {
 // Add "WPTuts Options" link to the "Appearance" menu
 function wptuts_menu_options() {
 	//add_theme_page( $page_title, $menu_title, $capability, $menu_slug, $function);
-     add_theme_page('WPTuts Options', 'WPTuts Options', 'edit_theme_options', 'wptuts-settings', 'wptuts_admin_options_page');
+     add_theme_page('Cham Mut Options', 'Cham Mut Options', 'edit_theme_options', 'wptuts-settings', 'wptuts_admin_options_page');
 }
 // Load the Admin Options page
 add_action('admin_menu', 'wptuts_menu_options');
@@ -61,7 +61,7 @@ function wptuts_admin_options_page() {
 			
 			<div id="icon-themes" class="icon32"><br /></div>
 		
-			<h2><?php _e( 'WPTuts Options', 'wptuts' ); ?></h2>
+			<h2><?php _e( 'Cham Mut Options', 'wptuts' ); ?></h2>
 			
 			<!-- If we have any error by submiting the form, they will appear here -->
 			<?php settings_errors( 'wptuts-settings-errors' ); ?>
